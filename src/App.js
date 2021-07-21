@@ -3,16 +3,18 @@ import "./App.css";
 import Library from "./components/Library";
 import Search from "./components/Search";
 import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
+import * as BooksAPI from "./BooksAPI";
 
 class BooksApp extends React.Component {
   state = {
     books: [],
-  
   };
 
-
-  // TODO: onLaunch books view
-
+  componentDidMount() {
+    BooksAPI.getAll().then((books) => {
+      this.setState({ books: books });
+    });
+  }
 
   //handleChange is the new books handler function it checks if the book exists in the Library or not
   handleBookChange = (newBook) => {
