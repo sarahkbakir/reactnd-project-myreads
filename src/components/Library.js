@@ -7,7 +7,7 @@ class Library extends React.Component {
     this.setState({ showSearchPage: true });
   };
   render() {
-    const books = this.props.books;
+    const {books} = this.props;
 
     return (
       <div className="list-books">
