@@ -8,25 +8,23 @@ const Book = (props)=> {
 
     const book = { ...props.book, shelf: newShelf };
 
-    this.props.callback(book);
+    props.callback(book);
   };
-  const coverImage = (props) =>{
-    if(props.book.imageLinks.thumbnail) {
-      return props.book.imageLinks.thumbnail
-    }else {
-      return props.book.imageLinks
-    }
-  }
 
-    return (
-      <div className="book">
+  return (
+    <div className="book">
         <div className="book-top">
           <div
             className="book-cover"
             style={{
               width: 128,
               height: 193,
-              backgroundImage: `url( ${coverImage}`,
+              backgroundImage: `url( ${
+
+                //coverimage for books with no thumbnails
+
+                props.book.imageLinks?
+                props.book.imageLinks.thumbnail : ""})`
             }}
           />
           <div className="book-shelf-changer">

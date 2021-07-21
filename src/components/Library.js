@@ -3,11 +3,12 @@ import Shelf from "./Shelf";
 import { Link } from "react-router-dom";
 
 class Library extends React.Component {
-  BtnHandler = (event) => {
-    this.setState({ showSearchPage: true });
+  state = {
+    books: [],
   };
+
   render() {
-    const {books} = this.props;
+    const { books } = this.props;
 
     return (
       <div className="list-books">

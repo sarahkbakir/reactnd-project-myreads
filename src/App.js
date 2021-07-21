@@ -7,7 +7,12 @@ import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
 class BooksApp extends React.Component {
   state = {
     books: [],
+  
   };
+
+
+  // TODO: onLaunch books view
+
 
   //handleChange is the new books handler function it checks if the book exists in the Library or not
   handleBookChange = (newBook) => {

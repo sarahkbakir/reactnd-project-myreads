@@ -12,13 +12,17 @@ class Search extends React.Component {
   search = (e) => {
     const query = e.target.value;
 
+    if (!query) {
+      this.setState({ searchResults: [] });
+      return;
+    }
+
     BooksAPI.search(query).then((books) => {
-      if (!books) {
-        // empty query
-        books = [];
-        
-      } else if (books.error) {
+      if (books.error) {
         // no results found
+
+        console.log("no results found for query: ", query);
+
         books = [];
       }
 
@@ -29,7 +33,7 @@ class Search extends React.Component {
   render() {
     const booksInLibrary = this.props.books;
     //checking if the books the user chose in search page already exist in library page, if they exist return the shelf and update the book choosen in the search page
-    
+
     for (let book of this.state.searchResults) {
       const foundBook = booksInLibrary.find(
         (libraryBook) => libraryBook.id === book.id
@@ -66,7 +70,7 @@ class Search extends React.Component {
         </div>
         <div className="search-books-results">
           <Shelf
-            title='Results'
+            title="Results"
             callback={this.props.callback}
             books={this.state.searchResults}
           />
