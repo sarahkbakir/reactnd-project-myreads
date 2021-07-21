@@ -1,17 +1,23 @@
 import React from "react";
 
-class Book extends React.Component {
-  
+const Book = (props)=> {
+
   //switching between shelves function is responsible for handling the user choice of shelf
-  changeShelf = (event) => {
+  const changeShelf = (event) => {
     const newShelf = event.target.value;
 
-    const book = { ...this.props.book, shelf: newShelf };
+    const book = { ...props.book, shelf: newShelf };
 
     this.props.callback(book);
   };
+  const coverImage = (props) =>{
+    if(props.book.imageLinks.thumbnail) {
+      return props.book.imageLinks.thumbnail
+    }else {
+      return props.book.imageLinks
+    }
+  }
 
-  render() {
     return (
       <div className="book">
         <div className="book-top">
@@ -20,11 +26,11 @@ class Book extends React.Component {
             style={{
               width: 128,
               height: 193,
-              backgroundImage: `url( ${this.props.book.imageLinks.thumbnail}`,
+              backgroundImage: `url( ${coverImage}`,
             }}
           />
           <div className="book-shelf-changer">
-            <select value={this.props.book.shelf} onChange={this.changeShelf}>
+            <select value={props.book.shelf} onChange={changeShelf}>
               <option disabled>Move to...</option>
               <option value="currentlyReading">Currently Reading</option>
               <option value="wantToRead">Want to Read</option>
@@ -33,12 +39,11 @@ class Book extends React.Component {
             </select>
           </div>
         </div>
-        <div className="book-title">{this.props.book.title}</div>
-        <div className="book-authors">{this.props.book.authors}</div>
+        <div className="book-title">{props.book.title}</div>
+        <div className="book-authors">{props.book.authors}</div>
         {/*   */}
       </div>
     );
-  }
 }
 
 export default Book;
